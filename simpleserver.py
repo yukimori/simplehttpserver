@@ -16,7 +16,7 @@ class PostHandler(BaseHTTPRequestHandler):
                      'CONTENT_TYPE':self.headers['Content-Type'],
                      })
 
-        print "form.value : " + form.value
+        print "form.value : " + str(form.value)
 
         #リクエストボディを取得してオブジェクト化する
         json_obj = json.loads(form.value)
