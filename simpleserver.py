@@ -8,12 +8,16 @@ import sys
 
 class PostHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+
+        print "self.headers : " + str(self.headers)
+        print "self.headers :['Content-type'] : " + self.headers['Content-Type']
+
         # POST されたフォームデータを解析する
         form = cgi.FieldStorage(
             fp=self.rfile, 
             headers=self.headers,
             environ={'REQUEST_METHOD':'POST',
-                     'CONTENT_TYPE':self.headers['Content-Type'],
+                     'CONTENT_TYPE':self.headers['Content-Type'], #Content-typeがリクエストにないとエラーになってしまう
                      })
 
         print "form.value : " + str(form.value)
@@ -28,7 +32,12 @@ class PostHandler(BaseHTTPRequestHandler):
         res["Path"] = self.path
         res["result"] = 0
         res["request_body"] = json_obj
-        
+
+        #HTTPServerインスタンスへのアクセス
+        #ハンドラからはserver変数にインスタンスが格納されている
+        print self.server.server_name ; #アドレスが格納されている
+        print self.server.server_port ; #ポートが格納されている
+
         # レスポンス開始
         self.send_response(200)
         self.end_headers()
