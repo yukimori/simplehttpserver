@@ -76,5 +76,6 @@ if __name__ == '__main__':
         quit()
     from BaseHTTPServer import HTTPServer
     server = HTTPServer((argvs[1], int(argvs[2])), PostHandler)
-    print 'Starting server, use <Ctrl-C> to stop'
+    print "Starting server, use <Ctrl-C> to stop"
+    print "client example) curl -X POST -H \"Accept: application/json\" -H \"Content-type: application/json\" -d '{\"kye1\":\"value1\", \"key2\":\"value2\"}' http://%s:%s" % (argvs[1], argvs[2])
     server.serve_forever()
